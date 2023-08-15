@@ -57,3 +57,12 @@ variable "private_data_subnet_az2_cidr" {
 variable "private_route_table_az1_cidr" {
   default = "0.0.0.0/0"
 }
+
+
+
+#AWS Region
+variable "aws_region" {
+  description = "AWS Region where resource is being created"
+  type        = string
+  default     = "us-east-1"
+}
