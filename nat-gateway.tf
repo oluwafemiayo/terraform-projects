@@ -59,7 +59,7 @@ resource "aws_route_table" "private_route_table_az1" {
   }
 
   tags   = {
-    Name = "private route table az1 cidr"
+    Name = "private route table az1"
   }
 }
 
