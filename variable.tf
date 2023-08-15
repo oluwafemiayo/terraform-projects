@@ -123,3 +123,11 @@ variable "ssl_certificate_arn" {
     type        = string
   
 }
+
+#SNS Topic Variables
+variable "operator_email" {
+    default     = "six@company.com"
+    description = "operator email"
+    type        = string
+  
+}
