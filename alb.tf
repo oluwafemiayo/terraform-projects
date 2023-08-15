@@ -17,21 +17,21 @@ resource "aws_lb" "application_load_balancer" {
 # create target group
 # terraform aws create target group
 resource "aws_lb_target_group" "alb_target_group" {
-  name        = 
-  target_type = 
-  port        = 
-  protocol    = 
-  vpc_id      = 
+  name        = "dev TG"
+  target_type = "instance"
+  port        = 80
+  protocol    = "tcp"
+  vpc_id      = aws_vpc.vpc.id
 
   health_check {
-    healthy_threshold   = 
-    interval            = 
-    matcher             = 
-    path                = 
-    port                = 
-    protocol            = 
-    timeout             = 
-    unhealthy_threshold = 
+    healthy_threshold   = 5
+    interval            = 30
+    matcher             = "200,301,302"
+    path                = "/"
+    port                = 80
+    protocol            = "HTTP"
+    timeout             = 5
+    unhealthy_threshold = 2
   }
 }
 
@@ -40,17 +40,17 @@ resource "aws_lb_target_group" "alb_target_group" {
 resource "aws_lb_listener" "alb_http_listener" {
   load_balancer_arn = aws_lb.application_load_balancer.arn
   port              = 80
-  protocol          = "http"
+  protocol          = "HTTP"
 
   default_action {
-    type = 
+    type = "redirect"
 
     redirect {
-      host        = 
-      path        = 
-      port        = 
-      protocol    = 
-      status_code = 
+      host        = "#{host}"
+      path        = "/#{path}"
+      port        = 443
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
     }
   }
 }
@@ -59,13 +59,13 @@ resource "aws_lb_listener" "alb_http_listener" {
 # terraform aws create listener
 resource "aws_lb_listener" "alb_https_listener" {
   load_balancer_arn  = aws_lb.application_load_balancer.arn
-  port               = 
-  protocol           = 
+  port               = 443
+  protocol           = "HTTPS"
   ssl_policy         = "ELBSecurityPolicy-2016-08"
-  certificate_arn    = 
+  certificate_arn    = var.ssl_certificate_arn
 
   default_action {
-    type             = 
-    target_group_arn = 
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.alb_target_group.arn
   }
 }

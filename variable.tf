@@ -1,12 +1,11 @@
 #vpc variable
-############################## VPC #################################
 variable "vpc_cidr" {
   default       = "10.0.0.0/16"
   description   = "vpc cidr block"
   type          = string
 }
 
-########################### PUBLIC SUBNET ##########################
+#Public Subnet Variables
 variable "public_subnet_az1_cidr" {
   default       = "10.0.0.0/24"
   description   = "public subnet az1 cidr block"
@@ -19,14 +18,14 @@ variable "public_subnet_az2_cidr" {
   type          = string
 }
 
-####################### PUBLIC ROUTE TABLE #########################
+#Public Route Tabel Variables 
 variable "public_route_table_cidr" {
   default       = "0.0.0.0/0"
   description   = "public subnet route table"
   type          = string
 }
 
-########################### APP SUBNET #############################
+#App subnet Variables
 variable "private_app_subnet_az1_cidr" {
   default       = "10.0.2.0/24"
   description   = "private app subnet az1 cidr"
@@ -39,7 +38,7 @@ variable "private_app_subnet_az2_cidr" {
   type          = string
 }
 
-########################### DATABASE SUBNET #########################
+#Database Subnet Variables
 variable "private_data_subnet_az1_cidr" {
   default       = "10.0.4.0/24"
   description   = "private data subnet az2 cidr"
@@ -53,7 +52,7 @@ variable "private_data_subnet_az2_cidr" {
 }
 
 
-############### NAT GATEWAY #################
+#Nat Gateway Variables
 variable "private_route_table_az1_cidr" {
   default       = "0.0.0.0/0"
   description   = "private route table az1 cidr"
@@ -79,7 +78,7 @@ variable "aws_region" {
 
 #Secutiry Group Variables
 variable "ssh_allowed_ips" {
-  default       = ["0.0.0.0/32"]
+  default       = ["{localhost_pubIP}/32"]
   description   = "List of IP addresses allowed to SSH"
   type          = list(string)
 
@@ -88,7 +87,7 @@ variable "ssh_allowed_ips" {
 
 #RDS Variables
 variable "database_snapshot_identifier" {
-    default     = "arn:aws:rds:us-east-1:849761329380:snapshot:database-1-snapshot"
+    default     = "arn:aws:rds:us-east-1:{ACCOUNT_ID}:snapshot:{DB_NAME}-snapshot"
     description = "database snapshot arn"
     type        = string
   
@@ -113,5 +112,14 @@ variable "multi_az_deployment" {
     default     = false
     description = "create a standby db instance"
     type        = bool
+  
+}
+
+
+#Application LoadBalancer Variables
+variable "ssl_certificate_arn" {
+    default     = "{SSL_CERTIFICATE_ARN}"
+    description = "ssl certificate arn"
+    type        = string
   
 }
