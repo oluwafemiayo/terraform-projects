@@ -79,8 +79,39 @@ variable "aws_region" {
 
 #Secutiry Group Variables
 variable "ssh_allowed_ips" {
-  default = ["0.0.0.0/32"]
-  description = "List of IP addresses allowed to SSH"
-  type = list(string)
+  default       = ["0.0.0.0/32"]
+  description   = "List of IP addresses allowed to SSH"
+  type          = list(string)
 
+}
+
+
+#RDS Variables
+variable "database_snapshot_identifier" {
+    default     = "arn:aws:rds:us-east-1:849761329380:snapshot:database-1-snapshot"
+    description = "database snapshot arn"
+    type        = string
+  
+}
+
+
+variable "database_instance_class" {
+    default     = "db.t2.micro"
+    description = "database instance type"
+    type        = string
+  
+}
+
+variable "database_instance_identifier" {
+    default     = "database-1"
+    description = "database instance identifier"
+    type        = string
+  
+}
+
+variable "multi_az_deployment" {
+    default     = false
+    description = "create a standby db instance"
+    type        = bool
+  
 }
