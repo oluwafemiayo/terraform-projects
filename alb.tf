@@ -1,23 +1,16 @@
 # create application load balancer
 # terraform aws create application load balancer
 resource "aws_lb" "application_load_balancer" {
-  name               = 
-  internal           = 
-  load_balancer_type = 
-  security_groups    = 
-
-  subnet_mapping {
-    subnet_id = 
-  }
-
-  subnet_mapping {
-    subnet_id = 
-  }
+  name               = "dev alb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.alb_security_group]
+  subnets            = [aws_subnet.public_subnet_az1.id, aws_subnet.public_subnet_az2.id]
 
   enable_deletion_protection = false
 
   tags   = {
-    Name = 
+    Name = "dev alb"
   }
 }
 
@@ -46,8 +39,8 @@ resource "aws_lb_target_group" "alb_target_group" {
 # terraform aws create listener
 resource "aws_lb_listener" "alb_http_listener" {
   load_balancer_arn = aws_lb.application_load_balancer.arn
-  port              = 
-  protocol          = 
+  port              = 80
+  protocol          = "http"
 
   default_action {
     type = 
