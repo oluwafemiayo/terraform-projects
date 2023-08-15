@@ -83,7 +83,7 @@ resource "aws_route_table" "private_route_table_az2" {
   vpc_id            = aws_vpc.vpc.id
 
   route {
-    cidr_block      = var.rivate_route_table_az2_cidr
+    cidr_block      = var.private_route_table_az2_cidr
     nat_gateway_id  = aws_nat_gateway.nat_gateway_az2.id
   }
 
