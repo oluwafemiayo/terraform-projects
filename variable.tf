@@ -74,3 +74,13 @@ variable "aws_region" {
   type          = string
   default       = "us-east-1"
 }
+
+
+
+#Secutiry Group Variables
+variable "ssh_allowed_ips" {
+  default = ["0.0.0.0/32"]
+  description = "List of IP addresses allowed to SSH"
+  type = list(string)
+
+}
