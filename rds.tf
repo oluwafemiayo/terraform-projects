@@ -2,7 +2,7 @@
 # terraform aws db subnet group
 resource "aws_db_subnet_group" "database_subnet_group" {
   name         = "dev database"
-  subnet_ids   = [aws_subnet.private_data_subnet_az1.id, ws_subnet, private_data_subnet_az2.id]
+  subnet_ids   = [aws_subnet.private_data_subnet_az1.id, aws_subnet.private_data_subnet_az2.id]
   description  = "subnets for database instance"
 
   tags   = {
