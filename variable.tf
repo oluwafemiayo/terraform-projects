@@ -55,14 +55,22 @@ variable "private_data_subnet_az2_cidr" {
 
 ############### NAT GATEWAY #################
 variable "private_route_table_az1_cidr" {
-  default = "0.0.0.0/0"
+  default       = "0.0.0.0/0"
+  description   = "private route table az1 cidr"
+  type          = string
 }
 
+
+variable "private_route_table_az2_cidr" {
+  default       = "0.0.0.0/0"
+  description   = "private route table az2 cidr"
+  type          = string
+}
 
 
 #AWS Region
 variable "aws_region" {
-  description = "AWS Region where resource is being created"
-  type        = string
-  default     = "us-east-1"
+  description   = "AWS Region where resource is being created"
+  type          = string
+  default       = "us-east-1"
 }

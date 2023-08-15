@@ -66,15 +66,15 @@ resource "aws_route_table" "private_route_table_az1" {
 # associate private app subnet az1 with private route table az1
 # terraform aws associate subnet with route table
 resource "aws_route_table_association" "private_app_subnet_az1_route_table_az1_association" {
-  subnet_id         = 
-  route_table_id    = 
+  subnet_id         = aws_subnet.private_app_subnet_az1.id
+  route_table_id    = aws_route_table.private_route_table_az1.id
 }
 
 # associate private data subnet az1 with private route table az1
 # terraform aws associate subnet with route table
 resource "aws_route_table_association" "private_data_subnet_az1_route_table_az1_association" {
-  subnet_id         = 
-  route_table_id    = 
+  subnet_id         = aws_subnet.private_data_subnet_az1.id
+  route_table_id    = aws_route_table.private_route_table_az1.id
 }
 
 # create private route table az2 and add route through nat gateway az2
@@ -83,7 +83,7 @@ resource "aws_route_table" "private_route_table_az2" {
   vpc_id            = aws_vpc.vpc.id
 
   route {
-    cidr_block      = 
+    cidr_block      = var.rivate_route_table_az2_cidr
     nat_gateway_id  = aws_nat_gateway.nat_gateway_az2.id
   }
 
