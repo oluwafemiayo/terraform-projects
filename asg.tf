@@ -25,7 +25,7 @@ resource "aws_autoscaling_group" "auto_scaling_group" {
   health_check_type   = "ELB"
 
   launch_template {
-    name    = aws_autoscaling_group.auto_scaling_group.name
+    name    = aws_launch_template.webserver_launch_template.name
     version = "$Latest"
   }
 
