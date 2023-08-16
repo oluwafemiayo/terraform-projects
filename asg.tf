@@ -36,7 +36,7 @@ resource "aws_autoscaling_group" "auto_scaling_group" {
   }
 
   lifecycle {
-    ignore_changes      = [target_group_arn]
+    ignore_changes      = [target_group_arns]
   }
 }
 

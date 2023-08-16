@@ -1,7 +1,7 @@
 # create application load balancer
 # terraform aws create application load balancer
 resource "aws_lb" "application_load_balancer" {
-  name               = "dev alb"
+  name               = "dev-alb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_security_group]
@@ -17,7 +17,7 @@ resource "aws_lb" "application_load_balancer" {
 # create target group
 # terraform aws create target group
 resource "aws_lb_target_group" "alb_target_group" {
-  name        = "dev TG"
+  name        = "dev-tg"
   target_type = "instance"
   port        = 80
   protocol    = "tcp"
