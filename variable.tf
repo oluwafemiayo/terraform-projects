@@ -161,3 +161,19 @@ variable "key_name" {
     type        = string
   
 }
+
+
+#Route53 Variables
+variable "domain_name" {
+    default     = "sixwinsapp.com"
+    description = "domain name"
+    type        = string
+  
+}
+
+variable "record_name" {
+    default     = "www"
+    description = "sub-domain name"
+    type        = string
+  
+}

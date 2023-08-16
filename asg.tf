@@ -50,7 +50,7 @@ resource "aws_autoscaling_attachment" "asg_alb_target_group_attachment" {
 # create an auto scaling group notification
 # terraform aws autoscaling notification
 resource "aws_autoscaling_notification" "webserver_asg_notifications" {
-  group_names = 
+  group_names = [aws_autoscaling_group.auto_scaling_group.name]
 
   notifications = [
     "autoscaling:EC2_INSTANCE_LAUNCH",
@@ -59,5 +59,5 @@ resource "aws_autoscaling_notification" "webserver_asg_notifications" {
     "autoscaling:EC2_INSTANCE_TERMINATE_ERROR",
   ]
 
-  topic_arn = 
+  topic_arn = aws_sns_topic.user_updates.arn
 }
